@@ -1,17 +1,17 @@
 #!/bin/sh
+
 # docker daemon start script
 [ $(id -u) = 0 ] || { echo 'must be root' ; exit 1; }
 
-#if [ $# -gt 0 ]
-#then
-#  echo "reading command..."
-#  cmd=$1
-#fi
-
-# get pid
+# make sure daemon is running
 if [ ! -f /var/run/docker.pid ]; then
-  echo 'docker daemon not running'
-  exit 1
+  echo 'docker daemon not running, try to start it...'
+  # start docker daemon
+  /etc/init.d/docker start
+  if [ ! -f /var/run/docker.pid ]; then
+    echo 'failed to start docker daemon. exit.'
+    exit 1
+  fi
 fi
   
 pid=$(cat /var/run/docker.pid)
@@ -29,8 +29,11 @@ cat >> docker.sh << EOF
 # check sudo 
 [ $(id -u) = 0 ] || { echo 'must be root' ; exit 1; }
 
-# start daemon
+# stop daemon first
+/etc/init.d/docker stop
+
+# start daemon with new args
 $cmd >> /var/lib/boot2docker/docker.log 2>&1 &
 EOF
 
-[ -f docker.sh ] && chmod +x docker.sh
+[ -f docker.sh ] && chmod +x docker.sh && ./docker.sh

@@ -4,12 +4,11 @@ docker-machine scp insecure-registry-daemon.sh default:/home/docker/insecure-reg
 # ssh into docker host
 docker-machine ssh
 
-# check daemon status & stop it.
+# check daemon status
 sudo /etc/init.d/docker status
-sudo /etc/init.d/docker stop
 
-# run script to generate another script
+# run script to generate another script (daemon will be stopped first & started again)
 sudo ./insecure-registry-daemon.sh
 
 # run new generated script to start daemon again.
-sudo ./docker.sh
+# sudo ./docker.sh
