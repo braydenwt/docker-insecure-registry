@@ -23,7 +23,7 @@ cmd=$(cat /proc/$pid/cmdline | tr '\000' ' ')
 cmd="$cmd -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock --insecure-registry 10.128.43.55:5000"
 echo $cmd
 
-cat >> docker.sh << EOF
+cat > docker.sh << EOF
 #!/bin/sh
 
 # check sudo 
@@ -36,4 +36,4 @@ cat >> docker.sh << EOF
 $cmd >> /var/lib/boot2docker/docker.log 2>&1 &
 EOF
 
-[ -f docker.sh ] && chmod +x docker.sh && ./docker.sh
+[ -f docker.sh ] && chmod +x docker.sh && ./docker.sh && rm docker.sh
