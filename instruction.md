@@ -10,7 +10,7 @@ docker-machine ssh
 # update the script file permission
 chmod +x ~/insecure-registry-daemon.sh
 
-# run script to generate another script (daemon will be stopped first & started again)
+# run script to support insecure registry (daemon will be stopped first & started again)
 sudo ./insecure-registry-daemon.sh
 
 # exit the docker host [ for windows & mac only ].
