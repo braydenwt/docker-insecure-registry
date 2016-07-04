@@ -4,8 +4,8 @@
 [ $(id -u) = 0 ] || { echo 'must be root' ; exit 1; }
 
 __is_boot2docker () {
-	uname -a | grep "boot2docker" 1>/dev/null && return 0;
-	return 1;
+  uname -a | grep "boot2docker" 1>/dev/null && return 0;
+  return 1;
 }
 
 # make sure daemon is running
@@ -14,7 +14,7 @@ if [ ! -f /var/run/docker.pid ]; then
 
   # start docker daemon
   if [ __is_boot2docker ]; then
-	/etc/init.d/docker start
+    /etc/init.d/docker start
   else
     service docker start
   fi
