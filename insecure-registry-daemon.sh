@@ -4,7 +4,7 @@
 [ $(id -u) = 0 ] || { echo 'must be root' ; exit 1; }
 
 __is_boot2docker () {
-	uname -a | grep "boot2docker" && return 0;
+	uname -a | grep "boot2docker" 1>/dev/null && return 0;
 	return 1;
 }
 
