@@ -13,7 +13,8 @@ if [ ! -f /var/run/docker.pid ]; then
   echo 'docker daemon not running, try to start it...'
 
   # start docker daemon
-  if [ __is_boot2docker ]; then
+  __is_boot2docker
+  if [ $? -eq 0 ]; then
     /etc/init.d/docker start
   else
     service docker start
@@ -36,7 +37,8 @@ echo $cmd | grep "\-\-insecure\-registry 10.128.43.55:5000" 1>/dev/null && { ech
 cmd="$cmd -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock --insecure-registry 10.128.43.55:5000"
 
 echo "stop docker daemon first"
-if [ __is_boot2docker ]; then
+__is_boot2docker
+if [ $? -eq 0 ]; then
   /etc/init.d/docker stop
 else
   service docker stop
