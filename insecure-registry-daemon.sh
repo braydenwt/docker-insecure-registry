@@ -46,7 +46,8 @@ fi
 
 echo "start daemon with new args"
 echo "new cmd: $cmd"
-if [ __is_boot2docker ]; then
+__is_boot2docker
+if [ $? -eq 0 ]; then
   $cmd >> /var/lib/boot2docker/docker.log 2>&1 &
 else
   $cmd &
