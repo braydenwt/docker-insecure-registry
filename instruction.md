@@ -1,5 +1,5 @@
 # download the script
-curl -fsSL https://raw.githubusercontent.com/braydenwt/docker101/master/insecure-registry-daemon.sh -o insecure-registry-daemon.sh
+curl -fsSL https://raw.githubusercontent.com/braydenwt/docker-insecure-registry/master/insecure-registry-daemon.sh -o insecure-registry-daemon.sh
 
 # copy script via ssh [ for windows & mac only ].
 docker-machine scp insecure-registry-daemon.sh default:/home/docker/insecure-registry-daemon.sh
